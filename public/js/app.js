@@ -782,6 +782,18 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a);
 
 // Vue.component('example', require('./components/Example.vue'));
 
+var app = new Vue({
+  el: '#app',
+  data: {}
+});
+
+$(document).ready(function () {
+  //  Dropdowns
+  $('.dropdown').hover(function (e) {
+    $(this).toggleClass('is-open');
+  });
+});
+
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {

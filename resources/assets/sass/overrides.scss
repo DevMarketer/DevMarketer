@@ -1,0 +1,101 @@
+/* ========================================
+   =========== Dropdown Override ==========
+   ======================================== */
+
+// Bulma doesn't come with a dropdown, so I have to take
+// matters into my own hands. This creates a dropdown menu
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  box-shadow: 0 0 8px #777;
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 102%;
+  z-index: 1000;
+  padding: 10px 0 0px 0;
+  min-width: 200px;
+  box-shadow: 0 0 1px rgba(57,70,78,.15), 0 20px 55px -8px rgba(57,70,78,.25);
+  text-align: left;
+  li {
+    &.seperator {
+      margin: 5px 0;
+      width: 100%;
+      border-top: 1px solid #ccc;
+    }
+
+    &>a {
+      display: block;
+      padding: 5px 0 5px 15px;
+      margin: 5px 0;
+      &:hover {
+        background-color: whitesmoke;
+      }
+    }
+  }
+}
+
+.dropdown.is-open .dropdown-menu{
+  display: block;
+}
+
+.dropdown.is-aligned-right .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+
+/* ========================================
+   =========== Nav Item Override ==========
+   ======================================== */
+
+// I want the .nav-item design that comes from bulma,
+// but with <button> instead of <a>. This is the bulma
+// code but targeting <button> instead, plus a few
+// modifications to normalize the <button> css
+
+button.nav-item {
+  background-color: transparent;
+  border: none;
+  color: $text-light;
+
+  &:hover {
+    color: $link-hover;
+  }
+
+  // Modifiers
+  &.is-active {
+    color: $link-active;
+  }
+
+  &.is-tab {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding-bottom: calc(0.75rem - 1px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: calc(0.75rem - 1px);
+  }
+
+  &:hover {
+    border-bottom-color: $primary;
+    border-top-color: transparent;
+  }
+
+  &.is-active {
+    border-bottom: 3px solid $primary;
+    color: $primary;
+    padding-bottom: calc(0.75rem - 3px);
+  }
+}
+
+
+.nav-item img {
+  max-height: 2.8rem;
+}
+
+.nav {
+  height: 4.5rem;
+}
