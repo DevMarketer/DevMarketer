@@ -35,8 +35,8 @@
           <a class="nav-item is-tab is-hidden-tablet">Discuss</a>
           <a class="nav-item is-tab is-hidden-tablet">Share</a>
           @if (Auth::guest())
-            <a class="nav-item is-tab">Login</a>
-            <a class="nav-item is-tab">Join the Community</a>
+            <a href="{{route('login')}}" class="nav-item is-tab">Login</a>
+            <a href="{{route('register')}}" class="nav-item is-tab">Join the Community</a>
           @else
             <div class="dropdown">
               <button class="nav-item is-tab dropdown-toggle">
