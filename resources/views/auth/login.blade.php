@@ -32,7 +32,7 @@
 
           <b-checkbox name="remember" class="m-t-20">Remember Me</b-checkbox>
 
-          <button class="button is-primary is-outlined is-fullwidth m-t-30">Log In</button>
+          <button class="button is-success is-outlined is-fullwidth m-t-30">Log In</button>
         </form>
       </div> <!-- end of .card-content -->
     </div> <!-- end of .card -->
