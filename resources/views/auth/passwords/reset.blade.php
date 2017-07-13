@@ -46,13 +46,13 @@
                   <input class="input {{$errors->has('password_confirmation') ? 'is-danger' : ''}}" type="password" name="password_confirmation" id="password-confirmation" required>
                 </p>
                 @if ($errors->has('password_confirmation'))
-                  <p class="help is-success">{{$errors->first('password_confirmation')}}</p>
+                  <p class="help is-danger">{{$errors->first('password_confirmation')}}</p>
                 @endif
               </div>
             </div>
           </div>
 
-          <button class="button is-primary is-outlined is-fullwidth m-t-30">Reset Password</button>
+          <button class="button is-success is-outlined is-fullwidth m-t-30">Reset Password</button>
         </form>
       </div> <!-- end of .card-content -->
     </div> <!-- end of .card -->
