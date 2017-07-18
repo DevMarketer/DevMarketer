@@ -70,7 +70,7 @@
             <input type="hidden" name="crud_selected" :value="crudSelected">
 
             <div class="column">
-              <table class="table" v-if="resource.length >= 3">
+              <table class="table" v-if="resource.length >= 3 && crudSelected.length > 0">
                 <thead>
                   <th>Name</th>
                   <th>Slug</th>
