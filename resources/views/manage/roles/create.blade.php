@@ -62,7 +62,7 @@
             </article>
           </div> <!-- end of .box -->
 
-          <button class="button is-primary">Create new User</button>
+          <button class="button is-primary">Create new Role</button>
         </div>
       </div>
     </form>
