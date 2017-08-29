@@ -64,7 +64,7 @@
       el: '#app',
       data: {
         auto_password: true,
-        rolesSelected: {!! old('roles') ? old('roles') : '[]' !!}
+        rolesSelected: [{!! old('roles') ? old('roles') : '' !!}]
       }
     });
   </script>
