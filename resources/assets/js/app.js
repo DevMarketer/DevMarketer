@@ -12,10 +12,3 @@ Vue.use(Buefy);
 //   el: '#app',
 //   data: {}
 // });
-
-$(document).ready(function() {
-  //  Dropdowns
-  $('.dropdown').hover(function(e) {
-    $(this).toggleClass('is-open')
-  })
-})
