@@ -799,7 +799,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a);
 //   data: {}
 // });
 
-__webpack_require__(46);
+__webpack_require__(35);
 
 /***/ }),
 /* 10 */
@@ -28748,28 +28748,19 @@ module.exports = Vue$3;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 35 */,
-/* 36 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
+/* 35 */
 /***/ (function(module, exports) {
 
 var accordions = document.getElementsByClassName('has-submenu');
 
 for (var i = 0; i < accordions.length; i++) {
+  if (accordions[i].classList.contains('is-active')) {
+    var submenu = accordions[i].nextElementSibling;
+    submenu.style.maxHeight = submenu.scrollHeight + "px";
+    submenu.style.marginTop = "0.75em";
+    submenu.style.marginBottom = "0.75em";
+  }
+
   accordions[i].onclick = function () {
     this.classList.toggle('is-active');
 
@@ -28787,6 +28778,12 @@ for (var i = 0; i < accordions.length; i++) {
     }
   };
 }
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
