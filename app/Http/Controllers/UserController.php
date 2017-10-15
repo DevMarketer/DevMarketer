@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate($request, [
+      $this->validateWith([
         'name' => 'required|max:255',
         'email' => 'required|email|unique:users'
       ]);
@@ -115,7 +115,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request, [
+      $this->validateWith([
         'name' => 'required|max:255',
         'email' => 'required|email|unique:users,email,'.$id
       ]);
