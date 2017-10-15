@@ -16711,3 +16711,15 @@ a.is-muted:hover {
   margin: 10px 25px;
 }
 
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-list li ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
