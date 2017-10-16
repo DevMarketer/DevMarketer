@@ -1,7 +1,7 @@
 <nav class="navbar has-shadow" >
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item is-paddingless" href="{{route('home')}}">
+      <a class="navbar-item is-paddingless m-r-15" href="{{route('home')}}">
         <img src="{{asset('images/devmarketer-logo.png')}}" alt="DevMarketer logo">
       </a>
       <button class="button navbar-burger">
