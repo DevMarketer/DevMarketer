@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Permission;
-use Session;
 
 class PermissionController extends Controller
 {
@@ -50,8 +49,9 @@ class PermissionController extends Controller
         $permission->description = $request->description;
         $permission->save();
 
-        Session::flash('success', 'Permission has been successfully added');
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('success',
+          'Permission has been successfully added'
+        );
 
       } elseif ($request->permission_type == 'crud') {
         $this->validateWith([
@@ -71,8 +71,10 @@ class PermissionController extends Controller
             $permission->description = $description;
             $permission->save();
           }
-          Session::flash('success', 'Permissions were all successfully added');
-          return redirect()->route('permissions.index');
+
+          return redirect()->route('permissions.index')->with('success',
+            'Permissions were all successfully added'
+          );
         }
       } else {
         return redirect()->route('permissions.create')->withInput();
@@ -121,8 +123,9 @@ class PermissionController extends Controller
       $permission->description = $request->description;
       $permission->save();
 
-      Session::flash('success', 'Updated the '. $permission->display_name . ' permission.');
-      return redirect()->route('permissions.show', $id);
+      return redirect()->route('permissions.show', $id)->with('success',
+        'Updated the '. $permission->display_name . ' permission.'
+      );
     }
 
     /**
