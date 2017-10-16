@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
-use Session;
 
 class RoleController extends Controller
 {
@@ -55,8 +54,9 @@ class RoleController extends Controller
         $role->syncPermissions(explode(',', $request->permissions));
       }
 
-      Session::flash('success', 'Successfully created the new '. $role->display_name . ' role in the database.');
-      return redirect()->route('roles.show', $role->id);
+      return redirect()->route('roles.show', $role->id)->with('success',
+        'Successfully created the new '. $role->display_name . ' role in the database.'
+      );
     }
 
     /**
@@ -107,8 +107,9 @@ class RoleController extends Controller
         $role->syncPermissions(explode(',', $request->permissions));
       }
 
-      Session::flash('success', 'Successfully update the '. $role->display_name . ' role in the database.');
-      return redirect()->route('roles.show', $id);
+      return redirect()->route('roles.show', $id)->with('success',
+        'Successfully update the '. $role->display_name . ' role in the database.'
+      );
     }
 
     /**
