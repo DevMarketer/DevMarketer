@@ -1,4 +1,4 @@
-const accordions = document.getElementsByClassName('has-submenu')
+const accordions = document.querySelectorAll('.has-submenu')
 
 function setSubmenuStyles (submenu, maxHeight, margins) {
   submenu.style.maxHeight = maxHeight
@@ -6,13 +6,13 @@ function setSubmenuStyles (submenu, maxHeight, margins) {
   submenu.style.marginBottom = margins
 }
 
-for (var i = 0; i < accordions.length; i++) {
-  if (accordions[i].classList.contains('is-active')) {
-    const submenu = accordions[i].nextElementSibling
+accordions.forEach((accordion) => {
+  if (accordion.classList.contains('is-active')) {
+    const submenu = accordion.nextElementSibling
     setSubmenuStyles(submenu, submenu.scrollHeight + "px", "0.75em")
   }
 
-  accordions[i].onclick = function () {
+  accordion.onclick = function () {
     this.classList.toggle('is-active')
 
     const submenu = this.nextElementSibling
@@ -24,4 +24,4 @@ for (var i = 0; i < accordions.length; i++) {
       setSubmenuStyles(submenu, submenu.scrollHeight + "px", "0.75em")
     }
   }
-}
+})
