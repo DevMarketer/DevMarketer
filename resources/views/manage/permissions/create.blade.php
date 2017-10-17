@@ -59,7 +59,7 @@
                   <b-checkbox v-model="crudSelected" native-value="update">Update</b-checkbox>
                 </div>
                 <div class="field">
-                  <b-checkbox native-value="delete">Delete</b-checkbox>
+                  <b-checkbox v-model="crudSelected" native-value="delete">Delete</b-checkbox>
                 </div>
             </div> <!-- end of .column -->
 
