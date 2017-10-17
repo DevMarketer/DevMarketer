@@ -50,10 +50,10 @@
               <div class="media-content">
                 <div class="content">
                   <h2 class="title">Permissions:</h1>
-                  <b-checkbox-group v-model="permissionsSelected">
+                  <b-checkbox-group>
                     @foreach ($permissions as $permission)
                       <div class="field">
-                        <b-checkbox :custom-value="{{$permission->id}}">{{$permission->display_name}} <em>({{$permission->description}})</em></b-checkbox>
+                        <b-checkbox v-model="permissionsSelected" :native-value="{{$permission->id}}">{{$permission->display_name}} <em>({{$permission->description}})</em></b-checkbox>
                       </div>
                     @endforeach
                   </ul>
