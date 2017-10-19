@@ -1,4 +1,4 @@
-<div class="side-menu">
+<div class="side-menu" id="admin-side-menu">
   <aside class="menu m-t-30 m-l-10">
     <p class="menu-label">
       General
