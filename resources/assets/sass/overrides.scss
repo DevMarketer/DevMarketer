@@ -17,3 +17,9 @@ a.is-muted:hover{
 .nav {
   height: 4.5rem;
 }
+.navbar-brand .brand-item {
+  margin-right: 0px;
+  @include desktop {
+    margin-right: 15px;
+  }
+}
