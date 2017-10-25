@@ -16728,10 +16728,15 @@ a.is-muted:hover {
 }
 
 .management-area {
-  position: absolute;
   top: 4rem;
-  left: 200px;
   right: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .management-area {
+    position: absolute;
+    left: 200px;
+  }
 }
 
 .flex-container {
