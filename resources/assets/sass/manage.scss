@@ -19,10 +19,14 @@
 
 
 .management-area {
-  position: absolute;
-  top: 4rem;
-  left: 200px;
-  right: 0;
+top: 4rem;
+right: 0;
+
+  @include desktop {
+    position: absolute;
+    left: 200px;
+  }
+
 }
 
 .flex-container {
