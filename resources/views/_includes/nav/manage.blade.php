@@ -8,6 +8,20 @@
     </ul>
 
     <p class="menu-label">
+      Content
+    </p>
+    <ul class="menu-list">
+      <li><a href="{{route('posts.index')}}" class="{{Nav::isResource('posts', 2)}}">Blog Posts</a></li>
+      {{-- <li>
+        <a class="has-submenu {{Nav::hasSegment(['roles', 'permissions'], 2)}}">Roles &amp; Permissions</a>
+        <ul class="submenu">
+          <li><a href="{{route('roles.index')}}" class="{{Nav::isResource('roles')}}">Roles</a></li>
+          <li><a href="{{route('permissions.index')}}" class="{{Nav::isResource('permissions')}}">Permissions</a></li>
+        </ul>
+      </li> --}}
+    </ul>
+
+    <p class="menu-label">
       Administration
     </p>
     <ul class="menu-list">
