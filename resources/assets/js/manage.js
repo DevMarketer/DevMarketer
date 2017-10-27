@@ -1,4 +1,4 @@
-const accordions = document.getElementsByClassName('has-submenu')
+const accordions = document.querySelectorAll('.has-submenu')
 const adminSlideButton = document.getElementById('admin-slideout-button')
 
 function setSubmenuStyles (submenu, maxHeight, margins) {
@@ -12,13 +12,13 @@ adminSlideButton.onclick = function () {
   document.getElementById('admin-side-menu').classList.toggle('is-active');
 }
 
-for (var i = 0; i < accordions.length; i++) {
-  if (accordions[i].classList.contains('is-active')) {
-    const submenu = accordions[i].nextElementSibling
+accordions.forEach((accordion) => {
+  if (accordion.classList.contains('is-active')) {
+    const submenu = accordion.nextElementSibling
     setSubmenuStyles(submenu, submenu.scrollHeight + "px", "0.75em")
   }
 
-  accordions[i].onclick = function () {
+  accordion.onclick = function () {
     this.classList.toggle('is-active')
 
     const submenu = this.nextElementSibling
@@ -30,4 +30,4 @@ for (var i = 0; i < accordions.length; i++) {
       setSubmenuStyles(submenu, submenu.scrollHeight + "px", "0.75em")
     }
   }
-}
+})
