@@ -16,13 +16,13 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug')->unique();
-            $table->integer('author_id')->unsigned();
+            $table->unsignedInteger('author_id');
             $table->string('title');
             $table->text('excerpt');
             $table->longText('content');
             $table->integer('status')->default(1);
-            $table->integer('type')->unsigned()->default(1);
-            $table->bigInteger('comment_count')->unsigned()->default(0);
+            $table->unsignedInteger('type')->default(1);
+            $table->unsignedBigInteger('comment_count')->default(0);
             $table->dateTime('published_at');
             $table->timestamps();
 
