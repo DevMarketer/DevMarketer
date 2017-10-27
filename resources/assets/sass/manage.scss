@@ -55,3 +55,68 @@ right: 0;
     transform: rotateY(180deg);
   }
 }
+
+.title.is-admin {
+  font-weight: 300;
+}
+
+.widget-area {
+  min-height: 75px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+
+  &.author-widget {
+    .selected-author {
+      display: flex;
+      align-content: flex-start;
+      img {
+        border-radius: 25px;
+      }
+      .author {
+        margin: auto 0 auto 10px;
+        .subtitle {
+          font-weight: 300;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
+  &.post-status-widget {
+    .status {
+      display: flex;
+      align-content: flex-start;
+      .status-icon {
+        min-width: 50px;
+        .icon {
+          width: 100%;
+          i {
+            text-align: center;
+          }
+        }
+      }
+      .status-details {
+        margin-left: 10px;
+        h4 {
+          font-weight: 400;
+          span.status-emphasis {
+            font-weight: 800;
+          }
+        }
+        p {
+          font-weight: 300;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  &.publish-buttons-widget {
+    display: flex;
+    min-height: 50px;
+
+    .primary-action-button, .secondary-action-button {
+      flex: 1;
+      margin: 0 5px;
+    }
+  }
+}
