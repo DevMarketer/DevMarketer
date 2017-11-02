@@ -22,6 +22,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Use cache in the package
+    |--------------------------------------------------------------------------
+    |
+    | Defines if Laratrust will use Laravel's Cache to cache the roles and permissions.
+    |
+    */
+    'use_cache' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Use teams feature in the package
     |--------------------------------------------------------------------------
     |
@@ -30,6 +40,19 @@ return [
     |
     */
     'use_teams' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Strict check for roles/permissions inside teams
+    |--------------------------------------------------------------------------
+    |
+    | Determines if a strict check should be done when checking if a role or permission
+    | is attached inside a team.
+    | If it's false, when checking a role/permission without specifying the team,
+    | it will check only if the user has attached that role/permission ignoring the team.
+    |
+    */
+    'teams_strict_check' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -121,7 +144,7 @@ return [
     | Laratrust Foreign Keys
     |--------------------------------------------------------------------------
     |
-    | These are the foreing keys used by laratrust in the intermediate tables.
+    | These are the foreign keys used by laratrust in the intermediate tables.
     |
     */
     'foreign_keys' => [
@@ -152,10 +175,15 @@ return [
     | Laratrust Middleware
     |--------------------------------------------------------------------------
     |
-    | This configuration helps to customize the Laratrust middlewares behavior.
+    | This configuration helps to customize the Laratrust middleware behavior.
     |
     */
     'middleware' => [
+        /**
+         * Define if the laratrust middleware are registered automatically in the service provider
+         */
+        'register' => false,
+
         /**
          * Method to be called in the middleware return case.
          * Available: abort|redirect
