@@ -8,7 +8,7 @@ Slug.defaults.mode = 'rfc3986';
 import Buefy from 'buefy'
 Vue.use(Buefy);
 
-Vue.component('slugWidget', require('./components/slugWidget.vue'));
+Vue.component('slug-widget', require('./components/slugWidget.vue'));
 
 // var app = new Vue({
 //   el: '#app',
