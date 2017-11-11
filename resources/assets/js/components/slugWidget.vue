@@ -73,8 +73,9 @@
           this.isEditing = true;
         },
         saveSlug: function() {
-          if (this.customSlug !== this.slug) this.wasEdited = true;
-          this.setSlug(this.customSlug);
+          const oldSlug = this.slug;
+          if (!this.wasEdited) this.setSlug(this.customSlug);
+          if (this.customSlug !== oldSlug) this.wasEdited = true;
           this.$emit('save', this.slug);
           this.isEditing = false;
         },
