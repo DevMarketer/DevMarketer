@@ -30863,12 +30863,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       try {
         var success = document.execCommand('copy');
         var response = success ? 'success' : 'warning';
-        var msg = success ? "Full Url Copied to Clipboard: " + this.fullUrl : "Copy failed, your browser may not support this feature";
-        this.$emit('copied', response, msg, this.fullUrl);
-        console.log("Full Url Copied to Clipboard:", this.fullUrl);
+        var msg = success ? "Copied to Clipboard: " + val : "Copy failed, your browser may not support this feature";
+        this.$emit('copied', response, msg, val);
+        console.log("Copied to Clipboard:", val);
       } catch (err) {
-        this.$emit('copy-failed', this.fullUrl);
-        console.log("Copy failed, your browser may not support this feature");
+        this.$emit('copy-failed', val);
+        console.log("Copy failed, your browser may not support this feature.");
+        console.log("Attempted to copy:", val);
       }
       document.body.removeChild(temp);
     }
