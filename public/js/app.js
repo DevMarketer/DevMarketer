@@ -30759,6 +30759,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     title: {
       type: String,
       required: true
+    },
+    icon: {
+      type: String,
+      default: "fa fa-link"
     }
   },
   data: function data() {
@@ -30774,21 +30778,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     adjustWidth: function adjustWidth(event) {
       var val = event.target.value;
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
-      ctx.font = "14px sans-serif";
-      var slugEditorInput = document.getElementById('slug-editor');
-      slugEditorInput.style.width = Math.ceil(ctx.measureText(val).width + 25) + "px";
+      var key = event.key;
+      if (key === "Escape") {
+        event.preventDefault();
+        this.cancelEditing();
+      } else if (key === "Enter") {
+        event.preventDefault();
+        this.saveSlug();
+      } else {
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.font = "14px sans-serif";
+        document.getElementById('slug-editor').style.width = Math.ceil(ctx.measureText(val).width + 25) + "px";
+      }
     },
     editSlug: function editSlug() {
       this.customSlug = this.slug;
       this.$emit('edit', this.slug);
       this.isEditing = true;
+      window.setTimeout(function () {
+        document.getElementById('slug-editor').focus();
+      }, 0); // must set timeout to wait for the thread to become available
     },
     saveSlug: function saveSlug() {
-      var oldSlug = this.slug;
+      if (this.customSlug !== this.slug) this.wasEdited = true;
       this.setSlug(this.customSlug);
-      if (this.customSlug !== oldSlug) this.wasEdited = true;
       this.$emit('save', this.slug);
       this.isEditing = false;
     },
@@ -30796,6 +30810,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.setSlug(this.title);
       this.$emit('reset', this.slug);
       this.wasEdited = false;
+      this.isEditing = false;
+    },
+    cancelEditing: function cancelEditing() {
+      this.$emit('cancel', this.customSlug, this.slug);
       this.isEditing = false;
     },
     setSlug: function setSlug(newVal) {
@@ -30842,7 +30860,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "slug-widget" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "icon-wrapper wrapper" }, [
+      _c("i", { class: _vm.icon })
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "url-wrapper wrapper" }, [
       _c("span", { staticClass: "root-url" }, [_vm._v(_vm._s(_vm.url))]),
@@ -30884,6 +30904,26 @@ var render = function() {
         domProps: { value: _vm.customSlug },
         on: {
           keyup: _vm.adjustWidth,
+          keydown: [
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "esc", 27, $event.key)
+              ) {
+                return null
+              }
+              $event.preventDefault()
+            },
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key)
+              ) {
+                return null
+              }
+              $event.preventDefault()
+            }
+          ],
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -30963,16 +31003,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon-wrapper wrapper" }, [
-      _c("i", { staticClass: "fa fa-link" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

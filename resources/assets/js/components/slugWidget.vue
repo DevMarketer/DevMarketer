@@ -33,13 +33,13 @@
 <template>
   <div class="slug-widget">
     <div class="icon-wrapper wrapper">
-      <i class="fa fa-link"></i>
+      <i :class="icon"></i>
     </div>
     <div class="url-wrapper wrapper">
       <span class="root-url">{{url}}</span
       ><span class="subdirectory-url">/{{subdirectory}}/</span
       ><span class="slug" v-show="slug && !isEditing">{{slug}}</span
-      ><input type="text" name="slug" id="slug-editor" class="input is-small" v-show="isEditing" v-model="customSlug" @keyup="adjustWidth"/>
+      ><input type="text" name="slug" id="slug-editor" class="input is-small" v-show="isEditing" v-model="customSlug" @keyup="adjustWidth" @keydown.esc.prevent @keydown.enter.prevent/>
     </div>
 
     <div class="button-wrapper wrapper">
@@ -64,6 +64,10 @@
         title: {
           type: String,
           required: true
+        },
+        icon: {
+          type: String,
+          default: "fa fa-link"
         }
       },
       data: function() {
@@ -78,22 +82,30 @@
       },
       methods: {
         adjustWidth: function(event) {
-          let val = event.target.value;
-          let canvas = document.createElement('canvas');
-          let ctx = canvas.getContext('2d');
-          ctx.font = "14px sans-serif";
-          const slugEditorInput = document.getElementById('slug-editor');
-          slugEditorInput.style.width = Math.ceil(ctx.measureText(val).width+25)+"px";
+          const val = event.target.value;
+          const key = event.key;
+          if (key === "Escape") {
+            event.preventDefault();
+            this.cancelEditing();
+          } else if (key === "Enter") {
+            event.preventDefault();
+            this.saveSlug();
+          } else {
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            ctx.font = "14px sans-serif";
+            document.getElementById('slug-editor').style.width = Math.ceil(ctx.measureText(val).width+25)+"px";
+          }
         },
         editSlug: function() {
           this.customSlug = this.slug;
           this.$emit('edit', this.slug);
           this.isEditing = true;
+          window.setTimeout(function () {document.getElementById('slug-editor').focus()}, 0); // must set timeout to wait for the thread to become available
         },
         saveSlug: function() {
-          const oldSlug = this.slug;
+          if (this.customSlug !== this.slug) this.wasEdited = true;
           this.setSlug(this.customSlug);
-          if (this.customSlug !== oldSlug) this.wasEdited = true;
           this.$emit('save', this.slug);
           this.isEditing = false;
         },
@@ -101,6 +113,10 @@
           this.setSlug(this.title);
           this.$emit('reset', this.slug);
           this.wasEdited = false;
+          this.isEditing = false;
+        },
+        cancelEditing: function() {
+          this.$emit('cancel', this.customSlug, this.slug);
           this.isEditing = false;
         },
         setSlug: function(newVal, count = 0) {

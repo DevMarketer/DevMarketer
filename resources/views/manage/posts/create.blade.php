@@ -15,13 +15,15 @@
     <form action="{{route('posts.store')}}" method="post">
       {{ csrf_field() }}
       <div class="columns">
-        <div class="column is-three-quarters-desktop">
+        <div class="column is-three-quarters-desktop is-three-quarters-tablet">
           <b-field>
             <b-input type="text" placeholder="Post Title" size="is-large" v-model="title">
             </b-input>
           </b-field>
 
-          <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
+          <div class="prevent-overflow">
+            <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
+          </div>
           <input type="hidden" v-model="slug" name="slug" />
 
           <b-field class="m-t-40">
