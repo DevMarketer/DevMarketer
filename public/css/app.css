@@ -16726,6 +16726,12 @@ a.is-muted:hover {
   width: 100%;
 }
 
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #admin-side-menu {
   position: fixed;
   top: 4rem;
@@ -16876,5 +16882,17 @@ a.is-muted:hover {
       -ms-flex: 1;
           flex: 1;
   margin: 0 5px;
+}
+
+.slug-widget .subdirectory-url,
+.slug-widget .root-url {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .slug-widget .subdirectory-url,
+  .slug-widget .root-url {
+    display: inline-block;
+  }
 }
 

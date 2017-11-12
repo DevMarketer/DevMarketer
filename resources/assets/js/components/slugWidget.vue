@@ -9,16 +9,25 @@
   }
   .slug {
     background-color: #fdfd96;
-    padding: 3px 5px
-  }
-  .input {
-    width: auto;
+    padding: 3px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
   }
   .url-wrapper {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     height: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  #slug-editor {
+    min-width: 142px;
+    max-width: 300px;
+  }
+
 </style>
 
 <template>
@@ -30,12 +39,12 @@
       <span class="root-url">{{url}}</span
       ><span class="subdirectory-url">/{{subdirectory}}/</span
       ><span class="slug" v-show="slug && !isEditing">{{slug}}</span
-      ><input type="text" name="slug" class="input is-small" v-show="isEditing" v-model="customSlug"/>
+      ><input type="text" name="slug" id="slug-editor" class="input is-small" v-show="isEditing" v-model="customSlug" @keyup="adjustWidth"/>
     </div>
 
     <div class="button-wrapper wrapper">
-      <button class="save-slug-button button is-small" v-show="!isEditing" @click.prevent="editSlug">Edit</button>
-      <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="saveSlug">Save</button>
+      <button class="save-slug-button button is-small" v-show="!isEditing" @click.prevent="editSlug">{{slug.length < 1 ? 'Create New Slug' : 'Edit'}}</button>
+      <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="saveSlug">{{customSlug == slug ? 'Cancel' : 'Save'}}</button>
       <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="resetEditing">Reset</button>
     </div>
   </div>
@@ -60,6 +69,7 @@
       data: function() {
         return {
           slug: this.setSlug(this.title),
+          truncatedSlug: '',
           isEditing: false,
           customSlug: '',
           wasEdited: false,
@@ -67,6 +77,14 @@
         }
       },
       methods: {
+        adjustWidth: function(event) {
+          let val = event.target.value;
+          let canvas = document.createElement('canvas');
+          let ctx = canvas.getContext('2d');
+          ctx.font = "14px sans-serif";
+          const slugEditorInput = document.getElementById('slug-editor');
+          slugEditorInput.style.width = Math.ceil(ctx.measureText(val).width+25)+"px";
+        },
         editSlug: function() {
           this.customSlug = this.slug;
           this.$emit('edit', this.slug);
@@ -74,7 +92,7 @@
         },
         saveSlug: function() {
           const oldSlug = this.slug;
-          if (!this.wasEdited) this.setSlug(this.customSlug);
+          this.setSlug(this.customSlug);
           if (this.customSlug !== oldSlug) this.wasEdited = true;
           this.$emit('save', this.slug);
           this.isEditing = false;
@@ -86,6 +104,7 @@
           this.isEditing = false;
         },
         setSlug: function(newVal, count = 0) {
+          if (newVal === '') return '';
           let slug = Slug(newVal + (count > 0 ? `-${count}` : ''));
           let vm = this;
 
@@ -114,7 +133,7 @@
             if (this.wasEdited == false) this.setSlug(this.title);
             // run ajax to see if slug is unique
             // if not unique, customize the slug to make it unique
-          }, 500)
+        }, 500)
       }
     }
 </script>

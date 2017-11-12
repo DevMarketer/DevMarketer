@@ -30237,7 +30237,7 @@ exports = module.exports = __webpack_require__(42)(undefined);
 
 
 // module
-exports.push([module.i, "\n.slug-widget[data-v-04f472b4] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.wrapper[data-v-04f472b4] {\n  margin-left: 8px;\n}\n.slug[data-v-04f472b4] {\n  background-color: #fdfd96;\n  padding: 3px 5px\n}\n.input[data-v-04f472b4] {\n  width: auto;\n}\n.url-wrapper[data-v-04f472b4] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 28px;\n}\n", ""]);
+exports.push([module.i, "\n.slug-widget[data-v-04f472b4] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.wrapper[data-v-04f472b4] {\n  margin-left: 8px;\n}\n.slug[data-v-04f472b4] {\n  background-color: #fdfd96;\n  padding: 3px 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.url-wrapper[data-v-04f472b4] {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 28px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#slug-editor[data-v-04f472b4] {\n  min-width: 142px;\n  max-width: 300px;\n}\n\n", ""]);
 
 // exports
 
@@ -30736,6 +30736,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -30755,6 +30764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       slug: this.setSlug(this.title),
+      truncatedSlug: '',
       isEditing: false,
       customSlug: '',
       wasEdited: false,
@@ -30762,14 +30772,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   methods: {
+    adjustWidth: function adjustWidth(event) {
+      var val = event.target.value;
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      ctx.font = "14px sans-serif";
+      var slugEditorInput = document.getElementById('slug-editor');
+      slugEditorInput.style.width = Math.ceil(ctx.measureText(val).width + 25) + "px";
+    },
     editSlug: function editSlug() {
       this.customSlug = this.slug;
       this.$emit('edit', this.slug);
       this.isEditing = true;
     },
     saveSlug: function saveSlug() {
-      if (this.customSlug !== this.slug) this.wasEdited = true;
+      var oldSlug = this.slug;
       this.setSlug(this.customSlug);
+      if (this.customSlug !== oldSlug) this.wasEdited = true;
       this.$emit('save', this.slug);
       this.isEditing = false;
     },
@@ -30782,6 +30801,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setSlug: function setSlug(newVal) {
       var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
+      if (newVal === '') return '';
       var slug = Slug(newVal + (count > 0 ? '-' + count : ''));
       var vm = this;
 
@@ -30860,9 +30880,10 @@ var render = function() {
           }
         ],
         staticClass: "input is-small",
-        attrs: { type: "text", name: "slug" },
+        attrs: { type: "text", name: "slug", id: "slug-editor" },
         domProps: { value: _vm.customSlug },
         on: {
+          keyup: _vm.adjustWidth,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -30893,7 +30914,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Edit")]
+        [_vm._v(_vm._s(_vm.slug.length < 1 ? "Create New Slug" : "Edit"))]
       ),
       _vm._v(" "),
       _c(
@@ -30915,7 +30936,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Save")]
+        [_vm._v(_vm._s(_vm.customSlug == _vm.slug ? "Cancel" : "Save"))]
       ),
       _vm._v(" "),
       _c(
