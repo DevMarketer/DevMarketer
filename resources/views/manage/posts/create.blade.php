@@ -21,9 +21,7 @@
             </b-input>
           </b-field>
 
-          <div class="prevent-overflow">
-            <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
-          </div>
+          <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
           <input type="hidden" v-model="slug" name="slug" />
 
           <b-field class="m-t-40">

@@ -36,14 +36,29 @@
       <i :class="icon"></i>
     </div>
     <div class="url-wrapper wrapper">
-      <span class="root-url">{{url}}</span
-      ><span class="subdirectory-url">/{{subdirectory}}/</span
-      ><span class="slug" v-show="slug && !isEditing">{{slug}}</span
+      <span class="root-url">{{urlSanitized}}</span
+      ><span class="subdirectory-url">/{{subdirectorySanitized}}/</span
+      ><span class="slug" :title="slug" v-show="slug && !isEditing">{{slug}}</span
       ><input type="text" name="slug" id="slug-editor" class="input is-small" v-show="isEditing" v-model="customSlug" @keyup="adjustWidth" @keydown.esc.prevent @keydown.enter.prevent/>
     </div>
 
     <div class="button-wrapper wrapper">
       <button class="save-slug-button button is-small" v-show="!isEditing" @click.prevent="editSlug">{{slug.length < 1 ? 'Create New Slug' : 'Edit'}}</button>
+      <b-dropdown hoverable v-show="!isEditing && slug.length > 1">
+        <button class="save-slug-button button is-small" slot="trigger">
+          <span>Actions</span>
+          <b-icon icon="arrow_drop_down"></b-icon>
+        </button>
+        <b-dropdown-item @click="copyToClipboard(fullUrl)" style="font-size: 0.8em;"><b-icon icon="content_copy" size="is-small"></b-icon> Copy Full Url</b-dropdown-item>
+        <b-dropdown-item @click="copyToClipboard(slug)" style="font-size: 0.8em;"><b-icon icon="content_copy" size="is-small"></b-icon> Copy Slug</b-dropdown-item>
+        <b-dropdown-item has-link style="font-size: 0.8em;">
+          <a :href="fullUrl" target="_blank">
+            <b-icon icon="link" size="is-small"></b-icon>
+            Visit Url
+          </a>
+        </b-dropdown-item>
+      </b-dropdown>
+      <!-- <button class="save-slug-button button is-small" v-show="!isEditing && slug.length > 1" @click.prevent="copyUrl"><i class="fa fa-copy"></i><span class="m-l-5">Copy</span></button> -->
       <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="saveSlug">{{customSlug == slug ? 'Cancel' : 'Save'}}</button>
       <button class="save-slug-button button is-small" v-show="isEditing" @click.prevent="resetEditing">Reset</button>
     </div>
@@ -73,7 +88,6 @@
       data: function() {
         return {
           slug: this.setSlug(this.title),
-          truncatedSlug: '',
           isEditing: false,
           customSlug: '',
           wasEdited: false,
@@ -141,7 +155,34 @@
               console.log(error);
             });
           }
-
+        },
+        copyToClipboard: function(val) {
+          let temp = document.createElement('textarea');
+          temp.value = val;
+          document.body.appendChild(temp);
+          temp.select();
+          try {
+            let success = document.execCommand('copy');
+            let response = (success ? 'success' : 'warning');
+            let msg = (success ? `Full Url Copied to Clipboard: ${this.fullUrl}` : "Copy failed, your browser may not support this feature");
+            this.$emit('copied', response, msg, this.fullUrl);
+            console.log("Full Url Copied to Clipboard:", this.fullUrl);
+          } catch (err) {
+            this.$emit('copy-failed', this.fullUrl);
+            console.log("Copy failed, your browser may not support this feature");
+          }
+          document.body.removeChild(temp);
+        }
+      },
+      computed: {
+        urlSanitized: function() {
+          return this.url.replace(/^\/|\/$/g, '');
+        },
+        subdirectorySanitized: function() {
+          return this.subdirectory.replace(/^\/|\/$/g, '');
+        },
+        fullUrl: function() {
+          return `${this.urlSanitized}/${this.subdirectorySanitized}/${this.slug}`;
         }
       },
       watch: {
