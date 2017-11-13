@@ -15,7 +15,7 @@
     <form action="{{route('posts.store')}}" method="post">
       {{ csrf_field() }}
       <div class="columns">
-        <div class="column is-three-quarters-desktop">
+        <div class="column is-three-quarters-desktop is-three-quarters-tablet">
           <b-field>
             <b-input type="text" placeholder="Post Title" size="is-large" v-model="title">
             </b-input>
@@ -79,7 +79,8 @@
       el: '#app',
       data: {
         title: '',
-        slug: ''
+        slug: '',
+        api_token: '{{Auth::user()->api_token}}'
       },
       methods: {
         updateSlug: function(val) {

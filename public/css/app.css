@@ -15399,6 +15399,9 @@ label.panel-block:hover {
 
 .b-table .table {
   width: 100%;
+  border: 0.125em solid transparent;
+  border-radius: 3px;
+  border-collapse: separate;
 }
 
 .b-table .table th {
@@ -15418,11 +15421,6 @@ label.panel-block:hover {
   margin-left: 0.5rem;
   margin-right: 0;
   font-size: 1rem;
-  opacity: 0;
-}
-
-.b-table .table th .th-wrap .icon.is-visible {
-  opacity: 1;
 }
 
 .b-table .table th .th-wrap.is-numeric {
@@ -15471,6 +15469,10 @@ label.panel-block:hover {
   background-color: transparent;
 }
 
+.b-table .table tr:not(.is-selected).is-hovered {
+  background: rgba(181, 181, 181, 0.35) !important;
+}
+
 .b-table .table .checkbox-cell {
   width: 40px;
 }
@@ -15492,6 +15494,10 @@ label.panel-block:hover {
 
 .b-table .table .detail td .detail-container {
   padding: 1rem;
+}
+
+.b-table .table:focus {
+  border: 0.125em solid rgba(0, 209, 178, 0.5);
 }
 
 .b-table .table.is-bordered th.is-current-sort,
@@ -15566,21 +15572,7 @@ label.panel-block:hover {
 }
 
 .b-table .level {
-  padding-bottom: 1rem;
-}
-
-.b-table .level .pagination .info {
-  padding-right: 0.5rem;
-}
-
-@media screen and (min-width: 769px), print {
-  .b-table .level .level-left {
-    padding-left: 1rem;
-  }
-
-  .b-table .level .level-right {
-    padding-right: 1rem;
-  }
+  padding-bottom: 1.5rem;
 }
 
 .b-table.is-loading {
@@ -16734,6 +16726,12 @@ a.is-muted:hover {
   width: 100%;
 }
 
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #admin-side-menu {
   position: fixed;
   top: 4rem;
@@ -16884,5 +16882,17 @@ a.is-muted:hover {
       -ms-flex: 1;
           flex: 1;
   margin: 0 5px;
+}
+
+.slug-widget .subdirectory-url,
+.slug-widget .root-url {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .slug-widget .subdirectory-url,
+  .slug-widget .root-url {
+    display: inline-block;
+  }
 }
 
