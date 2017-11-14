@@ -8,7 +8,10 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    {{-- You are logged in! --}}
+                  <pre>
+                    {{-- {{ dd(json_encode(LaraFlash::allByPriority())) }} --}}
+                  </pre>
                 </div>
             </div>
         </div>
