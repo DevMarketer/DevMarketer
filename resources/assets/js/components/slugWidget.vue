@@ -163,9 +163,9 @@
           temp.select();
           try {
             let success = document.execCommand('copy');
-            let response = (success ? 'success' : 'warning');
+            let type = (success ? 'success' : 'warning');
             let msg = (success ? `Copied to Clipboard: ${val}` : "Copy failed, your browser may not support this feature");
-            this.$emit('copied', response, msg, val);
+            this.$emit('copied', type, msg, val);
             console.log("Copied to Clipboard:", val);
           } catch (err) {
             this.$emit('copy-failed', val);
