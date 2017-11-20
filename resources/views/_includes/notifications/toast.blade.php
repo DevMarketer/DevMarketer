@@ -75,7 +75,6 @@
           actionText: 'Ok'
         };
         const options = Object.assign({}, defaults, optionsPassed);
-
         this.$snackbar.open({
               duration: options.duration,
               message: msg,
@@ -94,7 +93,6 @@
           type: 'is-dark'
         };
         const options = Object.assign({}, defaults, optionsPassed);
-
         this.$toast.open({
               duration: options.duration,
               message: msg,

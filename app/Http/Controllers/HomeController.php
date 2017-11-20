@@ -24,10 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-      LaraFlash::snackbar('Testing 000')->priority(10);
-      LaraFlash::info('Testing 111')->priority(5);
-      LaraFlash::success('Testing Success')->priority(1);
-      LaraFlash::danger('Testing 555')->priority(3);
-      return view('home');
+      LaraFlash::add()->content('Hello World')->priority(6)->type('Info');
+      LaraFlash::snackbar('Click to continue')->priority(3);
+      LaraFlash::success("Yay it worked!");
+      LaraFlash::danger('Oops Something went wrong!');
+        return view('home');
     }
 }

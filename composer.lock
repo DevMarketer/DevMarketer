@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc8100faf64546102062e921d65c5825",
+    "content-hash": "20ec424a71fa571fe3568830fe8b45e8",
     "packages": [
         {
             "name": "devmarketer/easynav",
@@ -70,20 +70,17 @@
         },
         {
             "name": "devmarketer/laraflash",
-            "version": "v1.0.2",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevMarketer/LaraFlash.git",
-                "reference": "52b9e05d103b012ca0f94a4dc9d843baa1a779ac"
+                "reference": "9dad87b942b75b7bbda8c397cf4af5e14e6291a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevMarketer/LaraFlash/zipball/52b9e05d103b012ca0f94a4dc9d843baa1a779ac",
-                "reference": "52b9e05d103b012ca0f94a4dc9d843baa1a779ac",
+                "url": "https://api.github.com/repos/DevMarketer/LaraFlash/zipball/9dad87b942b75b7bbda8c397cf4af5e14e6291a9",
+                "reference": "9dad87b942b75b7bbda8c397cf4af5e14e6291a9",
                 "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
             },
             "type": "library",
             "extra": {
@@ -124,7 +121,7 @@
                 "notifications",
                 "session"
             ],
-            "time": "2017-11-14T04:10:22+00:00"
+            "time": "2017-11-14T23:05:12+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -339,20 +336,23 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "728952b90a333b5c6f77f06ea9422b94b585878d"
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/728952b90a333b5c6f77f06ea9422b94b585878d",
-                "reference": "728952b90a333b5c6f77f06ea9422b94b585878d",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -377,7 +377,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2017-05-14T14:47:48+00:00"
+            "time": "2017-11-14T20:44:03+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -570,16 +570,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.20",
+            "version": "v5.5.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c"
+                "reference": "6321069a75723d88103526903d3192f0b231544a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ce0019d22a83b1b240330ea4115ae27a4d75d79c",
-                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6321069a75723d88103526903d3192f0b231544a",
+                "reference": "6321069a75723d88103526903d3192f0b231544a",
                 "shasum": ""
             },
             "require": {
@@ -653,6 +653,8 @@
             "suggest": {
                 "aws/aws-sdk-php": "Required to use the SQS queue driver and SES mail driver (~3.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.5).",
+                "ext-pcntl": "Required to use all features of the queue worker.",
+                "ext-posix": "Required to use all features of the queue worker.",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
                 "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~6.0).",
                 "laravel/tinker": "Required to use the tinker console command (~1.0).",
@@ -697,7 +699,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-11-07T14:24:50+00:00"
+            "time": "2017-11-14T15:08:13+00:00"
         },
         {
             "name": "laravel/tinker",
