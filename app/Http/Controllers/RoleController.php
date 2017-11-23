@@ -39,17 +39,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validateWith([
+      $data = $this->validateWith([
         'display_name' => 'required|max:255',
         'name' => 'required|max:100|alpha_dash|unique:roles',
         'description' => 'sometimes|max:255'
       ]);
 
-      $role = new Role();
-      $role->display_name = $request->display_name;
-      $role->name = $request->name;
-      $role->description = $request->description;
-      $role->save();
+      $role = Role::create($data);
 
       if ($request->permissions) {
         $role->syncPermissions(explode(',', $request->permissions));
@@ -93,15 +89,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validateWith([
+      $data = $this->validateWith([
         'display_name' => 'required|max:255',
         'description' => 'sometimes|max:255'
       ]);
 
       $role = Role::findOrFail($id);
-      $role->display_name = $request->display_name;
-      $role->description = $request->description;
-      $role->save();
+      $role->update($data);
 
       if ($request->permissions) {
         $role->syncPermissions(explode(',', $request->permissions));
